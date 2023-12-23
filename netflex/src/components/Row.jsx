@@ -1,8 +1,10 @@
 import axios from "axios";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
 function Row({ title, fetchURL }) {
   const [movies, setMovies] = useState([]);
+  const [like, setLike] = useState(false);
 
   useEffect(
     function () {
@@ -32,6 +34,13 @@ function Row({ title, fetchURL }) {
               <div className="absolute left-0 top-0 h-full w-full text-white  opacity-0 hover:bg-black/80 hover:opacity-100">
                 <p className="flex h-full items-center justify-center whitespace-normal text-center text-xs font-bold md:text-sm">
                   {movie?.title}
+                </p>
+                <p>
+                  {like ? (
+                    <FaHeart className="absolute left-4 top-4 text-gray-400" />
+                  ) : (
+                    <FaRegHeart className="absolute left-4 top-4 text-gray-400" />
+                  )}
                 </p>
               </div>
             </div>
