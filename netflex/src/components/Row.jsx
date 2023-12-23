@@ -19,7 +19,10 @@ function Row({ title, fetchURL }) {
     <>
       <h2 className="p-4 font-bold text-white md:text-xl">{title}</h2>
       <div className="relative flex items-center">
-        <div className={"slider"}>
+        <div
+          id={"slider"}
+          className="relative h-full w-full overflow-x-scroll scroll-smooth whitespace-nowrap scrollbar-hide"
+        >
           {movies.map((movie, id) => (
             <Movie movie={movie} key={id} />
           ))}
