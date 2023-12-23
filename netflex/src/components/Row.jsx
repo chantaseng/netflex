@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Movie from "./Movie";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
-function Row({ title, fetchURL }) {
+function Row({ title, fetchURL, rowID }) {
   const [movies, setMovies] = useState([]);
 
   useEffect(
@@ -17,12 +17,12 @@ function Row({ title, fetchURL }) {
   // console.log(movies);
 
   function slideLeft() {
-    const slider = document.getElementById("slider");
+    const slider = document.getElementById("slider" + rowID);
     slider.scrollLeft = slider.scrollLeft - 500;
   }
 
   function slideRight() {
-    const slider = document.getElementById("slider");
+    const slider = document.getElementById("slider" + rowID);
     slider.scrollLeft = slider.scrollLeft + 500;
   }
 
@@ -36,7 +36,7 @@ function Row({ title, fetchURL }) {
           size={40}
         />
         <div
-          id={"slider"}
+          id={"slider" + rowID}
           className="relative h-full w-full overflow-x-scroll scroll-smooth whitespace-nowrap scrollbar-hide"
         >
           {movies.map((movie, id) => (
