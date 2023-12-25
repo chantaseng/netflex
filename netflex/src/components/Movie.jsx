@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useState } from 'react';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
-function Movie({ movie, id }) {
+function Movie({ movie }) {
   const [favorite, setFavorite] = useState(false);
 
   return (
