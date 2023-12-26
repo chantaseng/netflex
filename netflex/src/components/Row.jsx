@@ -1,7 +1,7 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import Movie from "./Movie";
-import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import Movie from './Movie';
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
 function Row({ title, fetchURL, rowID }) {
   const [movies, setMovies] = useState([]);
@@ -17,12 +17,12 @@ function Row({ title, fetchURL, rowID }) {
   // console.log(movies);
 
   function slideLeft() {
-    const slider = document.getElementById("slider" + rowID);
+    const slider = document.getElementById('slider' + rowID);
     slider.scrollLeft = slider.scrollLeft - 500;
   }
 
   function slideRight() {
-    const slider = document.getElementById("slider" + rowID);
+    const slider = document.getElementById('slider' + rowID);
     slider.scrollLeft = slider.scrollLeft + 500;
   }
 
@@ -32,12 +32,12 @@ function Row({ title, fetchURL, rowID }) {
       <div className="group relative flex items-center">
         <MdChevronLeft
           onClick={slideLeft}
-          className="absolute left-0 z-10 hidden cursor-pointer rounded-full bg-white opacity-50 hover:opacity-100 group-hover:block"
+          className="absolute left-5 z-10 hidden cursor-pointer rounded-full bg-white opacity-50 hover:opacity-100 group-hover:block"
           size={40}
         />
         <div
-          id={"slider" + rowID}
-          className="relative h-full w-full overflow-x-scroll scroll-smooth whitespace-nowrap scrollbar-hide"
+          id={'slider' + rowID}
+          className="relative mx-2 h-full w-full overflow-x-scroll scroll-smooth whitespace-nowrap scrollbar-hide"
         >
           {movies.map((movie, id) => (
             <Movie movie={movie} key={id} />
@@ -45,7 +45,7 @@ function Row({ title, fetchURL, rowID }) {
         </div>
         <MdChevronRight
           onClick={slideRight}
-          className="absolute right-0 z-10 hidden cursor-pointer rounded-full bg-white opacity-50 hover:opacity-100 group-hover:block"
+          className="absolute right-2 z-10 hidden cursor-pointer rounded-full bg-white opacity-50 hover:opacity-100 group-hover:block"
           size={40}
         />
       </div>

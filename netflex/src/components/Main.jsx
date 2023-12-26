@@ -1,6 +1,6 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import requests from "../Request";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import requests from '../Request';
 
 function Main() {
   const [movies, setMovies] = useState([]);
@@ -16,7 +16,7 @@ function Main() {
 
   const truncateString = function (str, num) {
     if (str?.length > num) {
-      return str.slice(0, num) + "...";
+      return str.slice(0, num) + '...';
     } else {
       return str;
     }
@@ -44,7 +44,7 @@ function Main() {
           <p className="text-sm text-gray-400">
             Released Date: {movie?.release_date}
           </p>
-          <p className='xl"max-w-[35%] w-full text-gray-200 md:max-w-[70%] lg:max-w-[50%]'>
+          <p className="w-full text-gray-200 md:max-w-[60%] lg:max-w-[50%] xl:max-w-[35%]">
             {truncateString(movie?.overview, 150)}
           </p>
         </div>
