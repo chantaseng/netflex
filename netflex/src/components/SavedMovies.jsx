@@ -56,7 +56,7 @@ function SavedMovies() {
           {movies.map((movie, id) => (
             <div
               className="relative inline-block w-[160px] cursor-pointer p-2 sm:w-[200px] md:w-[240px] lg:w-[280px]"
-              key={movie?.id}
+              key={id}
             >
               <img
                 className="block h-auto w-full"
