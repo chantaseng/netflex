@@ -32,12 +32,12 @@ function Row({ title, fetchURL, rowID }) {
       <div className="group relative flex items-center">
         <MdChevronLeft
           onClick={slideLeft}
-          className="absolute left-5 z-10 hidden cursor-pointer rounded-full bg-white opacity-50 hover:opacity-100 group-hover:block"
+          className="absolute left-2 z-10 hidden cursor-pointer rounded-full bg-white opacity-50 hover:opacity-100 group-hover:block"
           size={40}
         />
         <div
           id={'slider' + rowID}
-          className="relative mx-2 h-full w-full overflow-x-scroll scroll-smooth whitespace-nowrap scrollbar-hide"
+          className="relative h-full w-full overflow-x-scroll scroll-smooth whitespace-nowrap scrollbar-hide"
         >
           {movies.map((movie, id) => (
             <Movie movie={movie} key={id} />
