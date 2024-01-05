@@ -1,9 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
+import Search from './Search';
+import { GoSearch } from 'react-icons/go';
+import { useState } from 'react';
 
 function Navbar() {
   const { user, logOut } = UserAuth();
   const navigate = useNavigate();
+  const [showSearch, setShowSearch] = useState(false);
   // console.log(user.email);
 
   const handleLogout = async function () {
@@ -15,6 +19,11 @@ function Navbar() {
     }
   };
 
+  // when i click on magnifying glass, search bar appears
+  const handleClickSearchbar = function () {
+    setShowSearch((searchbar) => !searchbar);
+  };
+
   return (
     <div className="absolute z-[100] flex w-full items-center justify-between p-4">
       <Link to="/">
@@ -23,7 +32,28 @@ function Navbar() {
         </h1>
       </Link>
       {user?.email ? (
-        <div>
+        <div className="flex items-center justify-center">
+          <button
+            className="pr-4 text-xl font-bold text-white"
+            onClick={handleClickSearchbar}
+          >
+            {showSearch ? (
+              <>
+                <div className="relative flex items-center justify-center">
+                  <div className="absolute left-1 z-10">
+                    <GoSearch />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Movie, series, genres"
+                    className="rounded bg-black pl-7 placeholder-gray-600 placeholder:text-sm"
+                  />
+                </div>
+              </>
+            ) : (
+              <GoSearch />
+            )}
+          </button>
           <Link to="/account">
             <button className="pr-4 text-white">Account</button>
           </Link>
@@ -35,7 +65,28 @@ function Navbar() {
           </button>
         </div>
       ) : (
-        <div>
+        <div className="flex items-center justify-center">
+          <button
+            className="pr-4 text-xl font-bold text-white"
+            onClick={handleClickSearchbar}
+          >
+            {showSearch ? (
+              <>
+                <div className="relative flex items-center justify-center">
+                  <div className="absolute left-1 z-10">
+                    <GoSearch />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Movie, series, genres"
+                    className="rounded bg-black pl-7 placeholder-gray-600 placeholder:text-sm"
+                  />
+                </div>
+              </>
+            ) : (
+              <GoSearch />
+            )}
+          </button>
           <Link to="/login">
             <button className="pr-4 text-white">Sign In</button>
           </Link>
