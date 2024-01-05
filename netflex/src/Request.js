@@ -1,4 +1,4 @@
-const key = "11e586945712cd25b4a70754556d9313";
+const key = import.meta.env.VITE_REACT_APP_API_KEY;
 
 const requests = {
   requestPopular: `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`,

@@ -21,6 +21,7 @@ function Main() {
       return str;
     }
   };
+  console.log(movie);
 
   return (
     <div className="h-[550px] w-full text-white">
