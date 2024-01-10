@@ -10,7 +10,7 @@ function Navbar() {
   const [showSearchbar, setShowSearchbar] = useState(false);
   const [search, setSearch] = useState('');
   const [movies, setMovies] = useState([]);
-  const [submit, setSubmit] = useState(false);
+  // const [submit, setSubmit] = useState(false);
   // console.log(user.email);
 
   const key = import.meta.env.VITE_REACT_APP_API_KEY;
@@ -30,62 +30,62 @@ function Navbar() {
   };
 
   // THIS WORKS, BUT WHEN I TYPE 'THOR' IN THE INPUT, IT IS ONLY GOING TO FETCH FOR 'THO'. WHY??
-  // const fetchMovies = async function () {
-  //   try {
-  //     await axios
-  //       .get(`https://api.themoviedb.org/3/search/movie?query=${search}${key}`)
-  //       .then((res) => setMovies(res.data.results));
-  //     // console.log(movies);
-  //     // console.log(search);
-  //     // console.log(key);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
+  const fetchMovies = async function () {
+    try {
+      await axios
+        .get(`https://api.themoviedb.org/3/search/movie?query=${search}${key}`)
+        .then((res) => setMovies(res.data.results));
+      console.log(movies);
+      console.log(search);
+      console.log(key);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
-  // const handleSubmit = async function (e) {
-  //   e.preventDefault();
-
-  //   try {
-  //     await fetchMovies();
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (search !== '') {
-  //     fetchMovies();
-  //   }
-  // }, [search]);
-
-  function handleSubmit(e) {
+  const handleSubmit = async function (e) {
     e.preventDefault();
-    setSubmit(true);
-  }
+
+    try {
+      await fetchMovies();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   useEffect(() => {
-    const fetchMovies = async function () {
-      try {
-        await axios
-          .get(
-            `https://api.themoviedb.org/3/search/movie?query=${search}${key}`,
-          )
-          .then((res) => setMovies(res.data.results));
-        // console.log(movies);
-        // console.log(search);
-        // console.log(key);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-
-    if (submit) {
+    if (search !== '') {
       fetchMovies();
-      setSubmit(false);
-      navigate('/search');
     }
-  }, [search, key, submit]);
+  }, [search]);
+
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   setSubmit(true);
+  // }
+
+  // useEffect(() => {
+  //   const fetchMovies = async function () {
+  //     try {
+  //       await axios
+  //         .get(
+  //           `https://api.themoviedb.org/3/search/movie?query=${search}${key}`,
+  //         )
+  //         .then((res) => setMovies(res.data.results));
+  //       console.log(movies);
+  //       // console.log(search);
+  //       // console.log(key);
+  //     } catch (error) {
+  //       console.log(error.message);
+  //     }
+  //   };
+
+  //   if (submit) {
+  //     fetchMovies();
+  //     setSubmit(false);
+  //     navigate('/search');
+  //   }
+  // }, [search, key, submit]);
 
   return (
     <div className="absolute z-[100] flex w-full items-center justify-between p-4">
