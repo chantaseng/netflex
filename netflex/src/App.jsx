@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Account from './pages/Account';
-import Search from './components/Search';
+import Search from './pages/Search';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
