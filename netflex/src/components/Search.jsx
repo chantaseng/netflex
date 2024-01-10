@@ -1,11 +1,10 @@
-import { GoSearch } from 'react-icons/go';
+import Navbar from './NavBar';
 
 function Search() {
   return (
     <>
-      <button className="pr-4 text-xl text-white">
-        <GoSearch />
-      </button>
+      <Navbar />
+      <div className="text-white">hello</div>
     </>
   );
 }

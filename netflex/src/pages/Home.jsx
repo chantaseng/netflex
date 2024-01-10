@@ -1,7 +1,8 @@
-import Main from "../components/Main";
-import Row from "../components/Row";
+import Main from '../components/Main';
+import Navbar from '../components/NavBar';
+import Row from '../components/Row';
 
-import requests from "../Request";
+import requests from '../Request';
 
 function Home() {
   return (
