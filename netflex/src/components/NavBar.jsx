@@ -8,10 +8,7 @@ function Navbar({ setResults, input, setInput }) {
   const { user, logOut } = UserAuth();
   const navigate = useNavigate();
   const [showSearchbar, setShowSearchbar] = useState(false);
-  // const [search, setSearch] = useState('');
   const [movies, setMovies] = useState([]);
-  // const [input, setInput] = useState('');
-  // const [submit, setSubmit] = useState(false);
   // console.log(user.email);
 
   const key = import.meta.env.VITE_REACT_APP_API_KEY;
