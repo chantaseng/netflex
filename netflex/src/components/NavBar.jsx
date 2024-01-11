@@ -105,7 +105,7 @@ function Navbar({ setResults, input, setInput }) {
   // };
 
   return (
-    <div className="absolute z-[100] flex w-full items-center justify-between p-4">
+    <div className="absolute top-0 z-[100] flex w-full items-center justify-between p-4">
       <Link to="/">
         <h1 className="cursor-pointer text-4xl font-bold text-red-600">
           NETFLEX
