@@ -4,12 +4,13 @@ import { GoSearch } from 'react-icons/go';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function Navbar() {
+function Navbar({ setResults, input, setInput }) {
   const { user, logOut } = UserAuth();
   const navigate = useNavigate();
   const [showSearchbar, setShowSearchbar] = useState(false);
-  const [search, setSearch] = useState('');
+  // const [search, setSearch] = useState('');
   const [movies, setMovies] = useState([]);
+  // const [input, setInput] = useState('');
   // const [submit, setSubmit] = useState(false);
   // console.log(user.email);
 
@@ -31,34 +32,36 @@ function Navbar() {
 
   // THIS WORKS, BUT WHEN I TYPE 'THOR' IN THE INPUT, IT IS ONLY GOING TO FETCH FOR 'THO'. WHY??
   const fetchMovies = async function () {
-    try {
-      await axios
-        .get(`https://api.themoviedb.org/3/search/movie?query=${search}${key}`)
-        .then((res) => setMovies(res.data.results));
-      console.log(movies);
-      console.log(search);
-      console.log(key);
-    } catch (error) {
-      console.log(error.message);
-    }
+    if (input !== '')
+      try {
+        await axios
+          .get(`https://api.themoviedb.org/3/search/movie?query=${input}${key}`)
+          .then((res) => setMovies(res.data.results));
+      } catch (error) {
+        console.log(error.message);
+      }
+    setResults(movies);
+    navigate('/search');
   };
 
   const handleSubmit = async function (e) {
     e.preventDefault();
 
-    try {
-      await fetchMovies();
-    } catch (error) {
-      console.log(error.message);
-    }
+    if (e.key === 'Enter')
+      try {
+        await fetchMovies();
+      } catch (error) {
+        console.log(error.message);
+      }
   };
 
   useEffect(() => {
-    if (search !== '') {
+    if (input !== '') {
       fetchMovies();
     }
-  }, [search]);
+  }, [input]);
 
+  // Try #2
   // function handleSubmit(e) {
   //   e.preventDefault();
   //   setSubmit(true);
@@ -87,6 +90,23 @@ function Navbar() {
   //   }
   // }, [search, key, submit]);
 
+  // #3
+  // const fetchMovies = async () => {
+  //   try {
+  //     await axios
+  //       .get(`https://api.themoviedb.org/3/search/movie?query=${search}${key}`)
+  //       .then((res) => setMovies(res.data.results));
+  //     console.log(movies);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
+
+  // const handleChange = (input) => {
+  //   setInput(input);
+  //   fetchMovies();
+  // };
+
   return (
     <div className="absolute z-[100] flex w-full items-center justify-between p-4">
       <Link to="/">
@@ -114,8 +134,9 @@ function Navbar() {
                       placeholder="Movie, series, genres"
                       className="rounded bg-black pl-7 placeholder-gray-600 placeholder:text-sm"
                       autoFocus
-                      onChange={(e) => setSearch(e.target.value)}
-                      value={search}
+                      onChange={(e) => setInput(e.target.value)}
+                      // onChange={(e) => handleChange(e.target.value)}
+                      value={input}
                     />
                   </form>
                 </div>
@@ -154,10 +175,11 @@ function Navbar() {
                       className="rounded bg-black pl-7 placeholder-gray-600 placeholder:text-sm"
                       autoFocus
                       onChange={(e) => {
-                        setSearch(e.target.value);
-                        console.log(search);
+                        setInput(e.target.value);
+                        // handleChange(e.target.value);
+                        console.log(input);
                       }}
-                      value={search}
+                      value={input}
                     />
                   </form>
                 </div>

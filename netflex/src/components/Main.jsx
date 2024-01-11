@@ -26,7 +26,7 @@ function Main() {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="h-[550px] w-full text-white">
         <div className="h-full w-full">
           <div className="absolute h-[550px] w-full bg-gradient-to-r from-black"></div>
