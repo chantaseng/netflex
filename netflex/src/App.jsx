@@ -1,7 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import { AuthContextProvider } from './context/AuthContext';
 
-import Navbar from './components/NavBar';
+// import Navbar from './components/NavBar';
+import Navbar1 from './components/NavBar1';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -12,19 +13,26 @@ import { useState } from 'react';
 
 function App() {
   const [results, setResults] = useState([]);
-  const [input, setInput] = useState('');
+  const [userSearchInput, setUserSearchInput] = useState('');
 
   return (
     <>
       <AuthContextProvider>
-        <Navbar setResults={setResults} input={input} setInput={setInput} />
+        {/* <Navbar setResults={setResults} input={input} setInput={setInput} /> */}
+        <Navbar1
+          setResults={setResults}
+          userSearchInput={userSearchInput}
+          setUserSearchInput={setUserSearchInput}
+        />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route
             path="/search"
-            element={<Search results={results} input={input} />}
+            element={
+              <Search results={results} userSearchInput={userSearchInput} />
+            }
           />
           <Route
             path="/account"
