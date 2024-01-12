@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import requests from '../Request';
-import Navbar from './NavBar';
 
 function Main() {
   const [movies, setMovies] = useState([]);
@@ -13,7 +12,6 @@ function Main() {
       .get(requests.requestPopular)
       .then((res) => setMovies(res.data.results));
   }, []);
-  // console.log(movie);
 
   const truncateString = function (str, num) {
     if (str?.length > num) {
@@ -26,7 +24,6 @@ function Main() {
 
   return (
     <>
-      {/* <Navbar /> */}
       <div className="h-[550px] w-full text-white">
         <div className="h-full w-full">
           <div className="absolute h-[550px] w-full bg-gradient-to-r from-black"></div>

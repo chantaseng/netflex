@@ -15,45 +15,14 @@ function Searchbar({ setResults, userSearchInput, setUserSearchInput }) {
     setShowSearchbar((searchbar) => !searchbar);
   };
 
-  // THIS WORKS, BUT WHEN I TYPE 'THOR' IN THE INPUT, IT IS ONLY GOING TO FETCH FOR 'THO'. WHY??
-  const fetchMovies = async function () {
-    if (userSearchInput !== '')
-      try {
-        await axios
-          .get(
-            `https://api.themoviedb.org/3/search/movie?query=${userSearchInput}${key}`,
-          )
-          .then((res) => setMovies(res.data.results));
-      } catch (error) {
-        console.log(error.message);
-      }
-    setResults(movies);
-    navigate('/search');
+  const handleChange = function (e) {
+    setUserSearchInput(e.target.value);
+    // console.log(userSearchInput);
   };
-
-  const handleSubmit = async function (e) {
-    e.preventDefault();
-
-    if (e.key === 'Enter')
-      try {
-        await fetchMovies();
-      } catch (error) {
-        console.log(error.message);
-      }
-  };
-
-  useEffect(() => {
-    if (userSearchInput !== '') {
-      fetchMovies();
-    }
-  }, [userSearchInput]);
 
   return (
     <>
-      <button
-        className="pr-4 text-xl font-bold text-white"
-        onClick={handleClick}
-      >
+      <div className="pr-4 text-xl font-bold text-white" onClick={handleClick}>
         {showSearchbar ? (
           <>
             <div className="relative flex items-center justify-center">
@@ -66,11 +35,8 @@ function Searchbar({ setResults, userSearchInput, setUserSearchInput }) {
                   placeholder="Movie, series, genres"
                   className="rounded bg-black pl-7 placeholder-gray-600 placeholder:text-sm"
                   autoFocus
-                  onChange={(e) => {
-                    setUserSearchInput(e.target.value);
-                    // handleChange(e.target.value);
-                    console.log(userSearchInput);
-                  }}
+                  onChange={handleChange}
+                  value={userSearchInput}
                 />
               </form>
             </div>
@@ -78,9 +44,42 @@ function Searchbar({ setResults, userSearchInput, setUserSearchInput }) {
         ) : (
           <GoSearch />
         )}
-      </button>
+      </div>
     </>
   );
 }
 
 export default Searchbar;
+
+// THIS WORKS, BUT WHEN I TYPE 'THOR' IN THE INPUT, IT IS ONLY GOING TO FETCH FOR 'THO'. WHY??
+// const fetchMovies = async function () {
+//   if (userSearchInput !== '')
+//     try {
+//       await axios
+//         .get(
+//           `https://api.themoviedb.org/3/search/movie?query=${userSearchInput}${key}`,
+//         )
+//         .then((res) => setMovies(res.data.results));
+//     } catch (error) {
+//       console.log(error.message);
+//     }
+//   setResults(movies);
+//   navigate('/search');
+// };
+
+// const handleSubmit = async function (e) {
+//   e.preventDefault();
+
+//   if (e.key === 'Enter')
+//     try {
+//       await fetchMovies();
+//     } catch (error) {
+//       console.log(error.message);
+//     }
+// };
+
+// useEffect(() => {
+//   if (userSearchInput !== '') {
+//     fetchMovies();
+//   }
+// }, [userSearchInput]);
