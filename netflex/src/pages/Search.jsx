@@ -13,7 +13,7 @@ function Search({ results, userSearchInput }) {
             className="relative h-full w-full overflow-x-scroll scroll-smooth scrollbar-hide"
           >
             {results.map((movie, id) => {
-              console.log(movie);
+              // console.log(movie);
               return <SearchedMovies movie={movie} key={id} />;
             })}
           </div>

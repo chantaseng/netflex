@@ -20,22 +20,7 @@ function Searchbar({ setResults, userSearchInput, setUserSearchInput }) {
     // console.log(userSearchInput);
   };
 
-  // const fetchMovies = function () {
-  //   axios
-  //     .get(
-  //       `https://api.themoviedb.org/3/search/movie?query=${userSearchInput}${key}`,
-  //     )
-  //     .then((res) => setMovies(res.data.results));
-  //   setResults(movies);
-  //   console.log(movies);
-  // };
-
-  // const handleSubmit = function () {
-  //   fetchMovies();
-  //   navigate('/search');
-  // };
-
-  // THIS WORKS, BUT WHEN I TYPE 'THOR' IN THE INPUT, IT IS ONLY GOING TO FETCH FOR 'THO'. WHY??
+  // Works but main component still fetches at every key stroke
   const fetchMovies = async function () {
     if (userSearchInput !== '')
       try {
@@ -58,7 +43,9 @@ function Searchbar({ setResults, userSearchInput, setUserSearchInput }) {
     } catch (error) {
       console.log(error.message);
     }
+    handleClick();
     navigate('/search');
+    setUserSearchInput('');
   };
 
   useEffect(() => {
@@ -95,35 +82,3 @@ function Searchbar({ setResults, userSearchInput, setUserSearchInput }) {
 }
 
 export default Searchbar;
-
-// const fetchMovies = async function () {
-//   // if (userSearchInput !== '')
-//   try {
-//     await axios
-//       .get(
-//         `https://api.themoviedb.org/3/search/movie?query=${userSearchInput}${key}`,
-//       )
-//       .then((res) => setMovies(res.data.results));
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-//   setResults(movies);
-//   navigate('/search');
-// };
-
-// const handleSubmit = async function (e) {
-//   e.preventDefault();
-
-//   if (e.key === 'Enter')
-//     try {
-//       await fetchMovies();
-//     } catch (error) {
-//       console.log(error.message);
-//     }
-// };
-
-// useEffect(() => {
-//   if (userSearchInput !== '') {
-//     fetchMovies();
-//   }
-// }, [userSearchInput]);
