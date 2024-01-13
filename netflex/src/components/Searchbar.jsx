@@ -20,6 +20,51 @@ function Searchbar({ setResults, userSearchInput, setUserSearchInput }) {
     // console.log(userSearchInput);
   };
 
+  // const fetchMovies = function () {
+  //   axios
+  //     .get(
+  //       `https://api.themoviedb.org/3/search/movie?query=${userSearchInput}${key}`,
+  //     )
+  //     .then((res) => setMovies(res.data.results));
+  //   setResults(movies);
+  //   console.log(movies);
+  // };
+
+  // const handleSubmit = function () {
+  //   fetchMovies();
+  //   navigate('/search');
+  // };
+
+  // THIS WORKS, BUT WHEN I TYPE 'THOR' IN THE INPUT, IT IS ONLY GOING TO FETCH FOR 'THO'. WHY??
+  const fetchMovies = async function () {
+    if (userSearchInput !== '')
+      try {
+        await axios
+          .get(
+            `https://api.themoviedb.org/3/search/movie?query=${userSearchInput}${key}`,
+          )
+          .then((res) => setMovies(res.data.results));
+      } catch (error) {
+        console.log(error.message);
+      }
+    setResults(movies);
+  };
+
+  const handleSubmit = async function (e) {
+    e.preventDefault();
+
+    try {
+      await fetchMovies();
+    } catch (error) {
+      console.log(error.message);
+    }
+    navigate('/search');
+  };
+
+  useEffect(() => {
+    fetchMovies();
+  }, [userSearchInput]);
+
   return (
     <>
       <div className="pr-4 text-xl font-bold text-white" onClick={handleClick}>
@@ -29,7 +74,7 @@ function Searchbar({ setResults, userSearchInput, setUserSearchInput }) {
               <div className="absolute left-1 z-10">
                 <GoSearch />
               </div>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <input
                   type="text"
                   placeholder="Movie, series, genres"
@@ -51,18 +96,17 @@ function Searchbar({ setResults, userSearchInput, setUserSearchInput }) {
 
 export default Searchbar;
 
-// THIS WORKS, BUT WHEN I TYPE 'THOR' IN THE INPUT, IT IS ONLY GOING TO FETCH FOR 'THO'. WHY??
 // const fetchMovies = async function () {
-//   if (userSearchInput !== '')
-//     try {
-//       await axios
-//         .get(
-//           `https://api.themoviedb.org/3/search/movie?query=${userSearchInput}${key}`,
-//         )
-//         .then((res) => setMovies(res.data.results));
-//     } catch (error) {
-//       console.log(error.message);
-//     }
+//   // if (userSearchInput !== '')
+//   try {
+//     await axios
+//       .get(
+//         `https://api.themoviedb.org/3/search/movie?query=${userSearchInput}${key}`,
+//       )
+//       .then((res) => setMovies(res.data.results));
+//   } catch (error) {
+//     console.log(error.message);
+//   }
 //   setResults(movies);
 //   navigate('/search');
 // };
