@@ -1,12 +1,26 @@
+import { useEffect, useState } from 'react';
 import Main from '../components/Main';
-import Navbar from '../components/NavBar';
+import Navbar1 from '../components/NavBar1';
 import Row from '../components/Row';
 
 import requests from '../Request';
 
 function Home() {
+  console.log('hello1');
+
+  // const [refresh, setRefresh] = useState(true);
+
+  // useEffect(() => {
+  //   if (results.length > 0) setRefresh(false);
+  // }, [results.length]);
+
   return (
     <>
+      {/* <Navbar1
+        setResults={setResults}
+        userSearchInput={userSearchInput}
+        setUserSearchInput={setUserSearchInput}
+      /> */}
       <Main />
       <Row rowID="1" title="Upcoming" fetchURL={requests.requestUpcoming} />
       <Row rowID="2" title="Trending" fetchURL={requests.requestTrending} />
@@ -21,3 +35,7 @@ function Home() {
 }
 
 export default Home;
+
+{
+  /* <Search results={results} userSearchInput={userSearchInput} /> */
+}

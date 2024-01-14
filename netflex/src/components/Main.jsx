@@ -4,14 +4,17 @@ import requests from '../Request';
 
 function Main() {
   const [movies, setMovies] = useState([]);
-
-  const movie = movies[Math.floor(Math.random() * movies.length)];
+  const [movie, setMovie] = useState([]);
 
   useEffect(function () {
     axios
       .get(requests.requestPopular)
       .then((res) => setMovies(res.data.results));
   }, []);
+
+  useEffect(() => {
+    setMovie(movies[Math.floor(Math.random() * movies.length)]);
+  }, [movies]);
 
   const truncateString = function (str, num) {
     if (str?.length > num) {

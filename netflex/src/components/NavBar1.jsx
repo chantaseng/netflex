@@ -16,52 +16,6 @@ function Navbar1({ setResults, userSearchInput, setUserSearchInput }) {
     }
   };
 
-  // Try #2
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   setSubmit(true);
-  // }
-
-  // useEffect(() => {
-  //   const fetchMovies = async function () {
-  //     try {
-  //       await axios
-  //         .get(
-  //           `https://api.themoviedb.org/3/search/movie?query=${search}${key}`,
-  //         )
-  //         .then((res) => setMovies(res.data.results));
-  //       console.log(movies);
-  //       // console.log(search);
-  //       // console.log(key);
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   };
-
-  //   if (submit) {
-  //     fetchMovies();
-  //     setSubmit(false);
-  //     navigate('/search');
-  //   }
-  // }, [search, key, submit]);
-
-  // #3
-  // const fetchMovies = async () => {
-  //   try {
-  //     await axios
-  //       .get(`https://api.themoviedb.org/3/search/movie?query=${search}${key}`)
-  //       .then((res) => setMovies(res.data.results));
-  //     console.log(movies);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
-
-  // const handleChange = (input) => {
-  //   setInput(input);
-  //   fetchMovies();
-  // };
-
   return (
     <div className="absolute top-0 z-[100] flex w-full items-center justify-between p-4">
       <Link to="/">
