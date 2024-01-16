@@ -9,6 +9,8 @@ const requests = {
   requestAction: `https://api.themoviedb.org/3/discover/movie?language=en-US&page=1&with_genres=28${key}`,
   requestRomance: `https://api.themoviedb.org/3/discover/movie?language=en-US&page=1&with_genres=10749${key}`,
   requestHistory: `https://api.themoviedb.org/3/discover/movie?language=en-US&page=1&with_genres=36${key}`,
+  requestTrendingMovie: `https://api.themoviedb.org/3/trending/movie/day?language=en-US${key}`,
+  requestTrendingSerie: `https://api.themoviedb.org/3/trending/tv/day?language=en-US${key}`,
 };
 
 export default requests;

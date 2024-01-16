@@ -4,24 +4,24 @@ import { UserAuth } from '../context/AuthContext';
 import { db } from '../firebase';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 
-function Movie({ movie }) {
+function Serie({ serie }) {
   const [favorite, setFavorite] = useState(false);
   const [saved, setSaved] = useState(false);
   const { user } = UserAuth();
-  // console.log(movie);
 
   // Referencing the db of 'users' and grabbing the specific user.email
-  const movieID = doc(db, 'users', `${user?.email}`);
+  const serieID = doc(db, 'users', `${user?.email}`);
 
+  // ReUsing saveMovie function, but just changed the serieID for serie
   const saveMovie = async function () {
     if (user?.email) {
       setFavorite(!favorite);
       setSaved(true);
-      await updateDoc(movieID, {
+      await updateDoc(serieID, {
         savedMovies: arrayUnion({
-          id: movie.id,
-          title: movie.title,
-          img: movie.backdrop_path,
+          id: serie.id,
+          title: serie.name,
+          img: serie.backdrop_path,
         }),
       });
     } else {
@@ -32,16 +32,16 @@ function Movie({ movie }) {
   return (
     <div
       className="relative inline-block w-[160px] cursor-pointer p-2 sm:w-[200px] md:w-[240px] lg:w-[280px]"
-      key={movie?.id}
+      key={serie?.id}
     >
       <img
         className="block h-auto w-full"
-        src={`https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`}
-        alt={movie?.title}
+        src={`https://image.tmdb.org/t/p/w500${serie?.backdrop_path}`}
+        alt={serie?.name}
       />
       <div className="absolute left-0 top-0 h-full w-full text-white  opacity-0 hover:bg-black/80 hover:opacity-100">
         <p className="flex h-full items-center justify-center whitespace-normal text-center text-xs font-bold md:text-sm">
-          {movie?.title}
+          {serie?.name}
         </p>
         <p onClick={saveMovie}>
           {favorite ? (
@@ -55,4 +55,4 @@ function Movie({ movie }) {
   );
 }
 
-export default Movie;
+export default Serie;

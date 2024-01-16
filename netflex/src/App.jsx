@@ -18,7 +18,6 @@ function App() {
   return (
     <>
       <AuthContextProvider>
-        {/* <Navbar setResults={setResults} input={input} setInput={setInput} /> */}
         <Navbar1
           setResults={setResults}
           userSearchInput={userSearchInput}
