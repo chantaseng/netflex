@@ -45,7 +45,7 @@ function Searchbar({ setResults, userSearchInput, setUserSearchInput }) {
     }
     handleClick();
     navigate('/search');
-    setUserSearchInput('');
+    // setUserSearchInput('');
   };
 
   useEffect(() => {

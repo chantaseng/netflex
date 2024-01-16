@@ -1,11 +1,22 @@
+import { useEffect, useState } from 'react';
 import SearchedMovies from '../components/SearchedMovies';
 
-function Search({ results, userSearchInput }) {
+function Search({ results, userSearchInput, setUserSearchInput }) {
+  const [searchbarInput] = useState(userSearchInput);
+
+  useEffect(() => {
+    const resetInput = setTimeout(() => {
+      setUserSearchInput('');
+    }, 1500);
+
+    return () => clearTimeout(resetInput);
+  }, []);
+
   return (
     <>
       <div className="mt-[72px]">
         <h2 className="p-4 font-bold text-white md:text-xl">
-          Search: {userSearchInput}
+          Search: {searchbarInput}
         </h2>
         <div className="group relative flex items-center">
           <div

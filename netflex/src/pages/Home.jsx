@@ -6,7 +6,7 @@ import Row from '../components/Row';
 import requests from '../Request';
 
 function Home() {
-  console.log('hello1');
+  // console.log('hello1');
 
   // const [refresh, setRefresh] = useState(true);
 

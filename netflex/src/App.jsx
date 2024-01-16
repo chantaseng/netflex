@@ -31,7 +31,11 @@ function App() {
           <Route
             path="/search"
             element={
-              <Search results={results} userSearchInput={userSearchInput} />
+              <Search
+                results={results}
+                userSearchInput={userSearchInput}
+                setUserSearchInput={setUserSearchInput}
+              />
             }
           />
           <Route
