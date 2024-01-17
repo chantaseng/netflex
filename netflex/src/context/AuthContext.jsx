@@ -13,10 +13,11 @@ const AuthContext = createContext();
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState({});
 
+  // line 20 is the name of your db in firestore, has nothing to do with Watchlist.jsx
   function signUp(email, password) {
     createUserWithEmailAndPassword(auth, email, password);
     setDoc(doc(db, 'users', email), {
-      savedMovies: [],
+      watchlist: [],
     });
   }
 

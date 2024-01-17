@@ -1,4 +1,5 @@
 import SavedMovies from '../components/SavedMovies';
+import Watchlist from '../components/Watchlist';
 
 function Account() {
   return (
@@ -11,10 +12,11 @@ function Account() {
         />
         <div className="fixed left-0 top-0 h-[550px] w-full bg-black/60"></div>
         <div className="absolute top-[20%] p-4 md:p-8">
-          <h1 className="text-3xl font-bold md:text-5xl">My Movies</h1>
+          <h1 className="text-3xl font-bold md:text-5xl">Watchlist</h1>
         </div>
       </div>
-      <SavedMovies />
+      {/* <SavedMovies /> */}
+      <Watchlist />
     </>
   );
 }

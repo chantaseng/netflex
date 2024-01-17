@@ -7,9 +7,7 @@ function Main() {
   const [movie, setMovie] = useState([]);
 
   useEffect(function () {
-    axios
-      .get(requests.requestPopular)
-      .then((res) => setMovies(res.data.results));
+    axios.get(requests.requestScifi).then((res) => setMovies(res.data.results));
   }, []);
 
   useEffect(() => {

@@ -18,19 +18,16 @@ function Row({ title, fetchURL, fetchSeriesURL, rowID }) {
     },
     [fetchURL],
   );
-  // console.log(movies);
 
   useEffect(
     function () {
       axios.get(fetchSeriesURL).then((res) => {
-        console.log(res.data.results);
         setSeries(res.data.results);
         setId(2);
       });
     },
     [fetchSeriesURL],
   );
-  // console.log(series);
 
   function slideLeft() {
     const slider = document.getElementById('slider' + rowID);
@@ -44,7 +41,9 @@ function Row({ title, fetchURL, fetchSeriesURL, rowID }) {
 
   return (
     <>
-      <h2 className="p-4 font-bold text-white md:text-xl">{title}</h2>
+      <h2 className="px-4 pb-0 pt-3 font-bold text-white md:text-xl">
+        {title}
+      </h2>
       <div className="group relative flex items-center">
         <MdChevronLeft
           onClick={slideLeft}
@@ -58,9 +57,6 @@ function Row({ title, fetchURL, fetchSeriesURL, rowID }) {
           {id === 1
             ? movies.map((movie, id) => <Movie movie={movie} key={id} />)
             : series.map((serie, id) => <Serie serie={serie} key={id} />)}
-          {/* {movies.map((movie, id) => (
-            <Movie movie={movie} key={id} />
-          ))} */}
         </div>
         <MdChevronRight
           onClick={slideRight}

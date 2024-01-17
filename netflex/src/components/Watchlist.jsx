@@ -5,7 +5,7 @@ import { db } from '../firebase';
 import { updateDoc, doc, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
-function SavedMovies() {
+function Watchlist() {
   const [movies, setMovies] = useState([]);
   const { user } = UserAuth();
 
@@ -22,7 +22,7 @@ function SavedMovies() {
   useEffect(
     function () {
       onSnapshot(doc(db, 'users', `${user?.email}`), (doc) => {
-        setMovies(doc.data()?.savedMovies);
+        setMovies(doc.data()?.watchlist);
       });
     },
     [user?.email],
@@ -34,7 +34,7 @@ function SavedMovies() {
     try {
       const result = movies.filter((movie) => movie?.id !== passedID);
       await updateDoc(movieRef, {
-        savedMovies: result,
+        watchlist: result,
       });
     } catch (error) {
       console.log(error);
@@ -88,4 +88,4 @@ function SavedMovies() {
   );
 }
 
-export default SavedMovies;
+export default Watchlist;

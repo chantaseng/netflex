@@ -12,13 +12,13 @@ function Serie({ serie }) {
   // Referencing the db of 'users' and grabbing the specific user.email
   const serieID = doc(db, 'users', `${user?.email}`);
 
-  // ReUsing saveMovie function, but just changed the serieID for serie
-  const saveMovie = async function () {
+  // watchlist is an empty object that i created in AuthContext for firestore db. It does NOT have any link with the Watchlist.jsx component. Same name is just a coincidence
+  const saveToWatchList = async function () {
     if (user?.email) {
       setFavorite(!favorite);
       setSaved(true);
       await updateDoc(serieID, {
-        savedMovies: arrayUnion({
+        watchlist: arrayUnion({
           id: serie.id,
           title: serie.name,
           img: serie.backdrop_path,
@@ -30,28 +30,32 @@ function Serie({ serie }) {
   };
 
   return (
-    <div
-      className="relative inline-block w-[160px] cursor-pointer p-2 sm:w-[200px] md:w-[240px] lg:w-[280px]"
-      key={serie?.id}
-    >
-      <img
-        className="block h-auto w-full"
-        src={`https://image.tmdb.org/t/p/w500${serie?.backdrop_path}`}
-        alt={serie?.name}
-      />
-      <div className="absolute left-0 top-0 h-full w-full text-white  opacity-0 hover:bg-black/80 hover:opacity-100">
-        <p className="flex h-full items-center justify-center whitespace-normal text-center text-xs font-bold md:text-sm">
-          {serie?.name}
-        </p>
-        <p onClick={saveMovie}>
-          {favorite ? (
-            <FaHeart className="absolute left-4 top-4 text-gray-400" />
-          ) : (
-            <FaRegHeart className="absolute left-4 top-4 text-gray-400" />
-          )}
-        </p>
-      </div>
-    </div>
+    <>
+      {serie.backdrop_path === null ? null : (
+        <div
+          className="relative inline-block w-[160px] cursor-pointer p-2 sm:w-[200px] md:w-[240px] lg:w-[280px]"
+          key={serie?.id}
+        >
+          <img
+            className="block h-auto w-full"
+            src={`https://image.tmdb.org/t/p/w500${serie?.backdrop_path}`}
+            alt={serie?.name}
+          />
+          <div className="absolute left-0 top-0 h-full w-full text-white  opacity-0 hover:bg-black/80 hover:opacity-100">
+            <p className="flex h-full items-center justify-center whitespace-normal text-center text-xs font-bold md:text-sm">
+              {serie?.name}
+            </p>
+            <p onClick={saveToWatchList}>
+              {favorite ? (
+                <FaHeart className="absolute right-4 top-4 text-gray-400" />
+              ) : (
+                <FaRegHeart className="absolute right-4 top-4 text-gray-400" />
+              )}
+            </p>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
