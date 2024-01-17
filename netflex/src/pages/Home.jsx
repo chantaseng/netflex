@@ -34,6 +34,16 @@ function Home() {
         fetchURL={requests.requestComedy}
       />
       <Row
+        rowID="36"
+        title="Horror Thrillers"
+        fetchURL={requests.requestHorror}
+      />
+      <Row
+        rowID="37"
+        title="Documentaries"
+        fetchURL={requests.requestDocumentary}
+      />
+      <Row
         rowID="4"
         title="Trending TV Shows"
         fetchSeriesURL={requests.requestTrendingSerie}
