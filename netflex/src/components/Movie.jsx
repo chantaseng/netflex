@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { UserAuth } from '../context/AuthContext';
 import { db } from '../firebase';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import axios from 'axios';
+import MovieInfo from './MovieInfo';
+import { useNavigate } from 'react-router-dom';
 
 function Movie({ movie }) {
   const [favorite, setFavorite] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [movieInfo, setMovieInfo] = useState([]);
+  const navigate = useNavigate();
   const { user } = UserAuth();
-  // console.log(movie);
 
   // Referencing the db of 'users' and grabbing the specific user.email
   const movieID = doc(db, 'users', `${user?.email}`);
@@ -30,12 +34,34 @@ function Movie({ movie }) {
     }
   };
 
+  const key = import.meta.env.VITE_REACT_APP_API_KEY;
+
+  const fetchData = async function () {
+    const id = movie.id;
+
+    try {
+      await axios
+        .get(`https://api.themoviedb.org/3/movie/${id}?language=en-US${key}`)
+        .then((res) => setMovieInfo(res.data));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  console.log(movieInfo);
+
+  const handleMovieInfo = function () {
+    fetchData();
+    navigate('/movie-details', { state: { movieInfo } });
+    // return <MovieInfo movieInfo={movieInfo} />;
+  };
+
   return (
     <>
       {movie.backdrop_path === null ? null : (
         <div
           className="relative inline-block w-[160px] cursor-pointer p-2 sm:w-[200px] md:w-[240px] lg:w-[280px]"
           key={movie?.id}
+          onClick={handleMovieInfo}
         >
           <img
             className="block h-auto w-full"

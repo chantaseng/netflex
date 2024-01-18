@@ -10,6 +10,7 @@ import Account from './pages/Account';
 import Search from './pages/Search';
 import ProtectedRoute from './components/ProtectedRoute';
 import { useState } from 'react';
+import MovieInfo from './components/MovieInfo';
 
 function App() {
   const [results, setResults] = useState([]);
@@ -37,6 +38,7 @@ function App() {
               />
             }
           />
+          <Route path="/movie-details" element={<MovieInfo />} />
           <Route
             path="/account"
             element={

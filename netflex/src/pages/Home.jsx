@@ -22,57 +22,53 @@ function Home() {
         title="Trending Movies"
         fetchURL={requests.requestTrendingMovie}
       />
-      <Row rowID="2" title="Action Movies" fetchURL={requests.requestAction} />
+      {/* <Row rowID="2" title="Action Movies" fetchURL={requests.requestAction} />
       <Row
-        rowID="90"
+        rowID="3"
         title="Critically Acclaimed Movies"
         fetchURL={requests.requestCriticallyAcclaimed}
       />
       <Row
-        rowID="3"
+        rowID="4"
         title="Witty Comedy Movies"
         fetchURL={requests.requestComedy}
       />
       <Row
-        rowID="36"
+        rowID="5"
         title="Horror Thrillers"
         fetchURL={requests.requestHorror}
       />
       <Row
-        rowID="37"
+        rowID="6"
         title="Documentaries"
         fetchURL={requests.requestDocumentary}
       />
       <Row
-        rowID="4"
+        rowID="7"
         title="Trending TV Shows"
         fetchSeriesURL={requests.requestTrendingSerie}
       />
       <Row
-        rowID="5"
+        rowID="8"
         title="Action & Adventure TV Shows"
         fetchSeriesURL={requests.requestActionSerie}
-      />
+      /> */}
       <Row
-        rowID="6"
+        rowID="9"
         title="Anime TV Shows"
         fetchSeriesURL={requests.requestAnimeSerie}
       />
-      <Row
-        rowID="7"
+      {/* <Row
+        rowID="10"
         title="Classic Soap Opera Shows"
         fetchSeriesURL={requests.requestSoapSerie}
       />
       <Row
-        rowID="77"
+        rowID="11"
         title="Bingeworthy TV Shows"
         fetchSeriesURL={requests.requestHistorySerie}
-      />
+      /> */}
     </>
   );
 }
 export default Home;
-
-{
-  /* <Search results={results} userSearchInput={userSearchInput} /> */
-}

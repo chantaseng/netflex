@@ -3,14 +3,25 @@ import SearchedMovies from '../components/SearchedMovies';
 
 function Search({ results, userSearchInput, setUserSearchInput }) {
   const [searchbarInput] = useState(userSearchInput);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  // console.log(searchbarInput);
 
-  useEffect(() => {
-    const resetInput = setTimeout(() => {
-      setUserSearchInput('');
-    }, 1500);
+  // To reset searchbarInput when you search another title on search page(does not work)
+  // useEffect(() => {
+  //   if (formSubmitted) {
+  //     const reset = () => {
+  //       searchbarInput('');
+  //     };
+  //   }
+  // }, [formSubmitted]);
 
-    return () => clearTimeout(resetInput);
-  }, []);
+  // useEffect(() => {
+  //   const resetInput = setTimeout(() => {
+  //     setUserSearchInput('');
+  //   }, 1000);
+
+  //   return () => clearTimeout(resetInput);
+  // }, []);
 
   return (
     <>
@@ -24,8 +35,13 @@ function Search({ results, userSearchInput, setUserSearchInput }) {
             className="relative h-full w-full overflow-x-scroll scroll-smooth scrollbar-hide"
           >
             {results.map((movie, id) => {
-              // console.log(movie);
-              return <SearchedMovies movie={movie} key={id} />;
+              return (
+                <SearchedMovies
+                  movie={movie}
+                  key={id}
+                  searchbarInput={searchbarInput}
+                />
+              );
             })}
           </div>
         </div>

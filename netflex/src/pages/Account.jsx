@@ -1,4 +1,3 @@
-import SavedMovies from '../components/SavedMovies';
 import Watchlist from '../components/Watchlist';
 
 function Account() {

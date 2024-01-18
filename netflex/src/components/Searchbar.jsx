@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function Searchbar({ setResults, userSearchInput, setUserSearchInput }) {
   const [showSearchbar, setShowSearchbar] = useState(false);
   const [movies, setMovies] = useState([]);
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const navigate = useNavigate();
 
   const key = import.meta.env.VITE_REACT_APP_API_KEY;
@@ -20,13 +21,12 @@ function Searchbar({ setResults, userSearchInput, setUserSearchInput }) {
     // console.log(userSearchInput);
   };
 
-  // Works but main component still fetches at every key stroke
   const fetchMovies = async function () {
     if (userSearchInput !== '')
       try {
         await axios
           .get(
-            `https://api.themoviedb.org/3/search/movie?query=${userSearchInput}${key}`,
+            `https://api.themoviedb.org/3/search/movie?query=${userSearchInput}&language=en-US&page=1${key}`,
           )
           .then((res) => setMovies(res.data.results));
       } catch (error) {
@@ -44,13 +44,25 @@ function Searchbar({ setResults, userSearchInput, setUserSearchInput }) {
       console.log(error.message);
     }
     handleClick();
+    setFormSubmitted(true);
     navigate('/search');
-    // setUserSearchInput('');
   };
 
   useEffect(() => {
     fetchMovies();
+    // console.log('you are typing in input');
   }, [userSearchInput]);
+
+  useEffect(() => {
+    if (formSubmitted) {
+      const resetInput = setTimeout(() => {
+        setUserSearchInput('');
+        setFormSubmitted(false);
+      }, 1000);
+
+      return () => clearTimeout(resetInput);
+    }
+  }, [formSubmitted]);
 
   return (
     <>
