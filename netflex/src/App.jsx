@@ -38,7 +38,7 @@ function App() {
               />
             }
           />
-          <Route path="/movie-details" element={<MovieInfo />} />
+          <Route path="movie/:id" element={<MovieInfo />} />
           <Route
             path="/account"
             element={

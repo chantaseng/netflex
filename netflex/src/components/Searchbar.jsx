@@ -50,7 +50,6 @@ function Searchbar({ setResults, userSearchInput, setUserSearchInput }) {
 
   useEffect(() => {
     fetchMovies();
-    // console.log('you are typing in input');
   }, [userSearchInput]);
 
   useEffect(() => {
