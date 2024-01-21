@@ -30,9 +30,13 @@ function MovieInfo() {
   }, [id, dataFetched]);
   console.log(movie);
 
+  useEffect(() => {
+    // Scroll to the top when the component mounts
+    window.scrollTo(0, 0);
+  }, []);
+
   const dateString = movie?.release_date;
   const year = dateString ? parseInt(dateString.split('-')[0]) : null;
-  // console.log(year);
 
   return (
     <>
@@ -45,8 +49,8 @@ function MovieInfo() {
             alt={movie?.title}
           />
           <div className="absolute top-[0%] my-10 h-[490px] w-full p-4 md:p-8">
-            <div className="flex">
-              <div>
+            <div className="flex h-full w-full">
+              <div className="h-full w-[50%]">
                 <img
                   className="h-[440px] w-[400px] rounded-md p-4"
                   src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
@@ -54,8 +58,8 @@ function MovieInfo() {
                 />
               </div>
 
-              <div className="flex flex-col text-white">
-                <div className="mt-10 flex w-full pl-10">
+              <div className="flex w-full flex-col pl-10 text-white">
+                <div className="mt-10 flex w-full">
                   <h1 className="font-bold md:text-3xl lg:text-5xl">
                     {movie?.title}{' '}
                     <span className="pl-1 font-thin md:text-3xl lg:text-5xl">
@@ -64,25 +68,42 @@ function MovieInfo() {
                   </h1>
                 </div>
 
-                <p className="pl-10 pt-2">
+                <div className="pt-4">
                   <div className="flex">
-                    <span>{movie?.release_date}</span>
-                    <span className="flex">
-                      {movie?.genres &&
-                        movie?.genres.map((genre, id) => (
-                          <div key={id}>
-                            <p>{genre.name}</p>
-                          </div>
-                        ))}
-                    </span>
+                    <span className="pr-3">{movie?.release_date}</span>
+
                     <span>{movie?.runtime} minutes</span>
                   </div>
-                </p>
+                </div>
+
+                <div className="my-8 flex">
+                  <p>
+                    ⭐️ {movie?.vote_average && movie?.vote_average.toFixed(1)}
+                  </p>
+                  <span className="px-1">&#x2022;</span>
+                  <span className="flex">
+                    {movie?.genres &&
+                      movie?.genres.map((genre, id) => (
+                        <div key={id}>
+                          {genre.name}
+                          {id !== movie.genres.length - 1 && ', '}
+                        </div>
+                      ))}
+                  </span>
+                </div>
+
+                <div>
+                  <h2 className="pb-4 text-lg italic text-gray-200">
+                    {movie?.tagline}
+                  </h2>
+                  <h1 className="pb-4 text-xl font-bold">Overview</h1>
+                  <p className="font-thin">{movie?.overview}</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="w-ful h-96 bg-white">actor face here</div>
+        <div className="w-ful h-96 bg-black"></div>
       </div>
     </>
   );

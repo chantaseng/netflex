@@ -22,7 +22,7 @@ function Home() {
         title="Trending Movies"
         fetchURL={requests.requestTrendingMovie}
       />
-      {/* <Row rowID="2" title="Action Movies" fetchURL={requests.requestAction} />
+      <Row rowID="2" title="Action Movies" fetchURL={requests.requestAction} />
       <Row
         rowID="3"
         title="Critically Acclaimed Movies"
@@ -52,13 +52,13 @@ function Home() {
         rowID="8"
         title="Action & Adventure TV Shows"
         fetchSeriesURL={requests.requestActionSerie}
-      /> */}
+      />
       <Row
         rowID="9"
         title="Anime TV Shows"
         fetchSeriesURL={requests.requestAnimeSerie}
       />
-      {/* <Row
+      <Row
         rowID="10"
         title="Classic Soap Opera Shows"
         fetchSeriesURL={requests.requestSoapSerie}
@@ -67,7 +67,7 @@ function Home() {
         rowID="11"
         title="Bingeworthy TV Shows"
         fetchSeriesURL={requests.requestHistorySerie}
-      /> */}
+      />
     </>
   );
 }
