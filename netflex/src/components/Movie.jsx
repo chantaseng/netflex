@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { UserAuth } from '../context/AuthContext';
 import { db } from '../firebase';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
-import axios from 'axios';
-import MovieInfo from './MovieInfo';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Movie({ movie }) {
   const [favorite, setFavorite] = useState(false);
@@ -35,13 +33,18 @@ function Movie({ movie }) {
 
   const id = movie.id;
 
-  const handleMovieInfo = function () {
-    navigate(`/movie/${id}`);
+  const handleMovieInfo = function (e) {
+    // Check if the click event originated from the heart icon
+    const isHeartIconClick = e.target.closest('.heart-icon');
+
+    // Navigate only if the click event didn't originate from the heart icon
+    if (!isHeartIconClick) {
+      navigate(`/movie/${id}`);
+    }
   };
 
   return (
     <>
-      {/* <NavLink to={`/movie/${id}`}> */}
       {movie.backdrop_path === null ? null : (
         <div
           className="relative inline-block w-[160px] cursor-pointer p-2 sm:w-[200px] md:w-[240px] lg:w-[280px]"
@@ -59,15 +62,14 @@ function Movie({ movie }) {
             </p>
             <p onClick={saveToWatchList}>
               {favorite ? (
-                <FaHeart className="absolute right-4 top-4 text-gray-400" />
+                <FaHeart className="heart-icon absolute right-4 top-4 text-gray-400" />
               ) : (
-                <FaRegHeart className="absolute right-4 top-4 text-gray-400" />
+                <FaRegHeart className="heart-icon absolute right-4 top-4 text-gray-400" />
               )}
             </p>
           </div>
         </div>
       )}
-      {/* </NavLink> */}
     </>
   );
 }
