@@ -3,10 +3,12 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { UserAuth } from '../context/AuthContext';
 import { db } from '../firebase';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 
 function Serie({ serie }) {
   const [favorite, setFavorite] = useState(false);
   const [saved, setSaved] = useState(false);
+  const navigate = useNavigate();
   const { user } = UserAuth();
 
   // Referencing the db of 'users' and grabbing the specific user.email
@@ -29,12 +31,25 @@ function Serie({ serie }) {
     }
   };
 
+  const id = serie.id;
+
+  const handleSerieInfo = function (e) {
+    // Check if the click event originated from the heart icon
+    const isHeartIconClick = e.target.closest('.heart-icon');
+
+    // Navigate only if the click event didn't originate from the heart icon
+    if (!isHeartIconClick) {
+      navigate(`/serie/${id}`);
+    }
+  };
+
   return (
     <>
       {serie.backdrop_path === null ? null : (
         <div
           className="relative inline-block w-[160px] cursor-pointer p-2 sm:w-[200px] md:w-[240px] lg:w-[280px]"
           key={serie?.id}
+          onClick={handleSerieInfo}
         >
           <img
             className="block h-auto w-full"
@@ -47,9 +62,9 @@ function Serie({ serie }) {
             </p>
             <p onClick={saveToWatchList}>
               {favorite ? (
-                <FaHeart className="absolute right-4 top-4 text-gray-400" />
+                <FaHeart className="heart-icon absolute right-4 top-4 text-gray-400" />
               ) : (
-                <FaRegHeart className="absolute right-4 top-4 text-gray-400" />
+                <FaRegHeart className="heart-icon absolute right-4 top-4 text-gray-400" />
               )}
             </p>
           </div>

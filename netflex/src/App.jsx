@@ -1,16 +1,16 @@
+import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AuthContextProvider } from './context/AuthContext';
 
-// import Navbar from './components/NavBar';
-import Navbar1 from './components/NavBar1';
+import ProtectedRoute from './components/ProtectedRoute';
+import Navbar from './components/NavBar';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Account from './pages/Account';
 import Search from './pages/Search';
-import ProtectedRoute from './components/ProtectedRoute';
-import { useState } from 'react';
-import MovieInfo from './components/MovieInfo';
+import MovieInfo from './pages/MovieInfo';
+import SerieInfo from './pages/SerieInfo';
 
 function App() {
   const [results, setResults] = useState([]);
@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <AuthContextProvider>
-        <Navbar1
+        <Navbar
           setResults={setResults}
           userSearchInput={userSearchInput}
           setUserSearchInput={setUserSearchInput}
@@ -39,6 +39,7 @@ function App() {
             }
           />
           <Route path="movie/:id" element={<MovieInfo />} />
+          <Route path="serie/:id" element={<SerieInfo />} />
           <Route
             path="/account"
             element={
