@@ -3,21 +3,23 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { UserAuth } from '../context/AuthContext';
 import { db } from '../firebase';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 
 function SearchedMovies({ movie }) {
   const [favorite, setFavorite] = useState(false);
   const [saved, setSaved] = useState(false);
+  const navigate = useNavigate();
   const { user } = UserAuth();
 
   // Referencing the db of 'users' and grabbing the specific user.email
   const movieID = doc(db, 'users', `${user?.email}`);
 
-  const saveMovie = async function () {
+  const saveToWatchList = async function () {
     if (user?.email) {
       setFavorite(!favorite);
       setSaved(true);
       await updateDoc(movieID, {
-        savedMovies: arrayUnion({
+        watchlist: arrayUnion({
           id: movie.id,
           title: movie.title,
           img: movie.backdrop_path,
@@ -44,11 +46,11 @@ function SearchedMovies({ movie }) {
             <p className="flex h-full items-center justify-center whitespace-normal text-center text-xs font-bold md:text-sm">
               {movie?.title}
             </p>
-            <p onClick={saveMovie}>
+            <p onClick={saveToWatchList}>
               {favorite ? (
-                <FaHeart className="absolute left-4 top-4 text-gray-400" />
+                <FaHeart className="absolute right-4 top-4 text-gray-400" />
               ) : (
-                <FaRegHeart className="absolute left-4 top-4 text-gray-400" />
+                <FaRegHeart className="absolute right-4 top-4 text-gray-400" />
               )}
             </p>
           </div>
