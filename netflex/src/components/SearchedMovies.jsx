@@ -30,12 +30,25 @@ function SearchedMovies({ movie }) {
     }
   };
 
+  const id = movie.id;
+
+  const handleMovieInfo = function (e) {
+    // Check if the click event originated from the heart icon
+    const isHeartIconClick = e.target.closest('.heart-icon');
+
+    // Navigate only if the click event didn't originate from the heart icon
+    if (!isHeartIconClick) {
+      navigate(`/movie/${id}`);
+    }
+  };
+
   return (
     <>
       {movie.backdrop_path === null ? null : (
         <div
           className="relative inline-block w-[160px] cursor-pointer p-2 sm:w-[200px] md:w-[240px] lg:w-[280px]"
           key={movie?.id}
+          onClick={handleMovieInfo}
         >
           <img
             className="block h-auto w-full"
