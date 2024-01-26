@@ -39,6 +39,7 @@ function Serie({ serie }) {
 
     // Navigate only if the click event didn't originate from the heart icon
     if (!isHeartIconClick) {
+      console.log(id);
       navigate(`/serie/${id}`);
     }
   };
