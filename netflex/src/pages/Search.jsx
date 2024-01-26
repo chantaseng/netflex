@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import SearchedMovies from '../components/SearchedMovies';
+import Movie from '../components/Movie';
 
 function Search({ results, userSearchInput, setUserSearchInput }) {
   const [searchbarInput] = useState(userSearchInput);
@@ -36,11 +36,7 @@ function Search({ results, userSearchInput, setUserSearchInput }) {
           >
             {results.map((movie, id) => {
               return (
-                <SearchedMovies
-                  movie={movie}
-                  key={id}
-                  searchbarInput={searchbarInput}
-                />
+                <Movie movie={movie} key={id} searchbarInput={searchbarInput} />
               );
             })}
           </div>
