@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
 import Main from '../components/Main';
-import Navbar1 from '../components/NavBar';
 import Row from '../components/Row';
+import Top10Row from '../components/Top10Row';
 
 import requests from '../Request';
 
@@ -23,6 +22,11 @@ function Home() {
         fetchURL={requests.requestTrendingMovie}
       />
       <Row rowID="2" title="Action Movies" fetchURL={requests.requestAction} />
+      {/* <Top10Row
+        rowID="12"
+        title="Top Movies Today"
+        fetchURL={requests.requestTop10Movies}
+      /> */}
       <Row
         rowID="3"
         title="Critically Acclaimed Movies"
