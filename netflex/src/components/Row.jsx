@@ -44,7 +44,7 @@ function Row({ title, fetchURL, fetchSeriesURL, rowID }) {
       <h2 className="px-4 pb-0 pt-3 font-bold text-white md:text-xl">
         {title}
       </h2>
-      <div className="group relative flex items-center">
+      <div className="group relative mb-4 flex items-center">
         <MdChevronLeft
           onClick={slideLeft}
           className="absolute left-2 z-10 hidden cursor-pointer rounded-full bg-white opacity-50 hover:opacity-100 group-hover:block"
