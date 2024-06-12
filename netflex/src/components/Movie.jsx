@@ -47,7 +47,7 @@ function Movie({ movie }) {
     <>
       {movie.backdrop_path === null ? null : (
         <div
-          className="relative inline-block w-[160px] cursor-pointer p-2 sm:w-[200px] md:w-[240px] lg:w-[320px]"
+          className="relative inline-block  w-[200px] cursor-pointer p-2  md:w-[320px]"
           key={movie?.id}
           onClick={handleMovieInfo}
         >

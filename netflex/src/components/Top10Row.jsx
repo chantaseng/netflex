@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Movie from './Movie';
-import Serie from './Serie';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import Top10Movie from './Top10Movie';
+import Top10Serie from './Top10Serie';
 
 const Top10Row = ({ title, fetchURL, fetchSeriesURL, rowID }) => {
   const [movies, setMovies] = useState([]);
@@ -56,8 +55,10 @@ const Top10Row = ({ title, fetchURL, fetchSeriesURL, rowID }) => {
           className="relative h-full w-full overflow-x-scroll scroll-smooth whitespace-nowrap scrollbar-hide"
         >
           {id === 1
-            ? movies.map((movie, id) => <Top10Movie movie={movie} key={id} />)
-            : series.map((serie, id) => <Serie serie={serie} key={id} />)}
+            ? movies.map((movie, id) => (
+                <Top10Movie movie={movie} key={id} index={id} />
+              ))
+            : series.map((serie, id) => <Top10Serie serie={serie} key={id} />)}
         </div>
         <MdChevronRight
           onClick={slideRight}

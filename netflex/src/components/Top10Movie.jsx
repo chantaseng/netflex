@@ -4,8 +4,10 @@ import { UserAuth } from '../context/AuthContext';
 import { db } from '../firebase';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import number1 from '../assets/number1.png';
+import numberImages from '../NumberImages';
 
-const Top10Movie = ({ movie }) => {
+const Top10Movie = ({ movie, index }) => {
   const [favorite, setFavorite] = useState(false);
   const [saved, setSaved] = useState(false);
   const navigate = useNavigate();
@@ -48,29 +50,29 @@ const Top10Movie = ({ movie }) => {
     <>
       {movie.backdrop_path === null ? null : (
         <div
-          className="relative inline-block w-[160px] cursor-pointer p-2 sm:w-[200px] md:w-[240px] lg:w-[320px]"
+          className="relative inline-block  cursor-pointer p-2 lg:p-5"
           key={movie?.id}
           onClick={handleMovieInfo}
         >
           <div className="flex items-center justify-center">
-            <span className="text-white">1</span>
+            <img src={numberImages[index]} width={100} height={100} />
             <img
               className="block h-auto w-full"
               src={`https://image.tmdb.org/t/p/w500${movie?.backdrop_path}`}
               alt={movie?.title}
             />
-          </div>
-          <div className="absolute left-0 top-0 h-full w-full text-white  opacity-0 hover:bg-black/80 hover:opacity-100">
-            <p className="flex h-full items-center justify-center whitespace-normal text-center text-xs font-bold md:text-sm">
-              {movie?.title}
-            </p>
-            <p onClick={saveToWatchList}>
-              {favorite ? (
-                <FaHeart className="heart-icon absolute right-4 top-4 text-gray-400" />
-              ) : (
-                <FaRegHeart className="heart-icon absolute right-4 top-4 text-gray-400" />
-              )}
-            </p>
+            <div className="absolute left-0 top-0 h-full w-full text-white  opacity-0 hover:bg-black/80 hover:opacity-100">
+              <p className="flex h-full items-center justify-center whitespace-normal text-center text-xs font-bold md:text-sm">
+                {movie?.title}
+              </p>
+              <p onClick={saveToWatchList}>
+                {favorite ? (
+                  <FaHeart className="heart-icon absolute right-4 top-4 text-gray-400" />
+                ) : (
+                  <FaRegHeart className="heart-icon absolute right-4 top-4 text-gray-400" />
+                )}
+              </p>
+            </div>
           </div>
         </div>
       )}

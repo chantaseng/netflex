@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Main from '../components/Main';
 import Row from '../components/Row';
 import Top10Row from '../components/Top10Row';
@@ -5,13 +6,52 @@ import Top10Row from '../components/Top10Row';
 import requests from '../Request';
 
 function Home() {
-  // console.log('hello1');
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [location, setLocation] = useState('');
 
-  // const [refresh, setRefresh] = useState(true);
+  const key = import.meta.env.VITE_REACT_APP_GEO_API_KEY;
 
-  // useEffect(() => {
-  //   if (results.length > 0) setRefresh(false);
-  // }, [results.length]);
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+
+    window.addEventListener('resize', handleResize);
+    return () => removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const fetchLocation = async () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const { latitude, longitude } = position.coords;
+            // Use a reverse geocoding service to get the location name
+            try {
+              const response = await fetch(
+                `https://api-bdc.net/data/reverse-geocode?latitude=${latitude}&longitude=${longitude}&localityLanguage=en&key=${key}`,
+              );
+              const data = await response.json();
+              console.log(data);
+              setLocation(
+                data.city ||
+                  data.locality ||
+                  data.principalSubdivision ||
+                  'your area',
+              );
+            } catch (error) {
+              console.error('Error fetching location data:', error);
+            }
+          },
+          (error) => {
+            console.error('Error getting location:', error);
+          },
+        );
+      } else {
+        console.error('Geolocation is not supported by this browser.');
+      }
+    };
+
+    fetchLocation();
+  }, []);
 
   return (
     <>
@@ -21,12 +61,18 @@ function Home() {
         title="Trending Movies"
         fetchURL={requests.requestTrendingMovie}
       />
-      <Row rowID="2" title="Action Movies" fetchURL={requests.requestAction} />
-      {/* <Top10Row
-        rowID="12"
-        title="Top Movies Today"
-        fetchURL={requests.requestTop10Movies}
-      /> */}
+      <Row
+        rowID="2"
+        title="Action & Adventure Movies"
+        fetchURL={requests.requestAction}
+      />
+      {screenWidth >= 1024 && (
+        <Top10Row
+          rowID="11"
+          title={`Top 20 Movies in ${location} Today`}
+          fetchURL={requests.requestTop10Movie}
+        />
+      )}
       <Row
         rowID="3"
         title="Critically Acclaimed Movies"
@@ -44,32 +90,34 @@ function Home() {
       />
       <Row
         rowID="6"
-        title="Documentaries"
-        fetchURL={requests.requestDocumentary}
-      />
-      <Row
-        rowID="7"
-        title="Trending TV Shows"
+        title="New TV Shows on Netflex"
         fetchSeriesURL={requests.requestTrendingSerie}
       />
       <Row
-        rowID="8"
-        title="Action & Adventure TV Shows"
+        rowID="7"
+        title="Bingeworthy TV Shows"
         fetchSeriesURL={requests.requestActionSerie}
       />
+      {/* {screenWidth >= 1024 && (
+        <Top10Row
+          rowID="12"
+          title={`Top 20 TV Shows in ${location} Today`}
+          fetchURL={requests.requestTop10Serie}
+        />
+      )} */}
       <Row
-        rowID="9"
-        title="Anime TV Shows"
+        rowID="8"
+        title="Anime"
         fetchSeriesURL={requests.requestAnimeSerie}
       />
       <Row
-        rowID="10"
-        title="Classic Soap Opera Shows"
-        fetchSeriesURL={requests.requestSoapSerie}
+        rowID="9"
+        title="True Crime Shows"
+        fetchSeriesURL={requests.requestCrimeSerie}
       />
       <Row
-        rowID="11"
-        title="Bingeworthy TV Shows"
+        rowID="10"
+        title="Award-Winning TV Dramas"
         fetchSeriesURL={requests.requestHistorySerie}
       />
     </>

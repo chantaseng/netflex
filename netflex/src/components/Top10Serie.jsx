@@ -4,8 +4,9 @@ import { UserAuth } from '../context/AuthContext';
 import { db } from '../firebase';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import number1 from '../assets/number1.png';
 
-function Serie({ serie }) {
+const Top10Serie = ({ serie }) => {
   const [favorite, setFavorite] = useState(false);
   const [saved, setSaved] = useState(false);
   const navigate = useNavigate();
@@ -73,6 +74,6 @@ function Serie({ serie }) {
       )}
     </>
   );
-}
+};
 
-export default Serie;
+export default Top10Serie;
